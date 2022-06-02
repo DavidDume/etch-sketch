@@ -1,6 +1,7 @@
 const container = document.querySelector('.container');
 const sizeSlider = document.querySelector('.sizeSlider');
 let sliderSize = document.querySelector('.sliderSize');
+
 sliderSize.textContent = sizeSlider.value;
 
 sizeSlider.oninput = function() {
@@ -19,15 +20,20 @@ function createGrid(val) {
 
 createGrid(sizeSlider.value);
 
-sizeSlider.addEventListener('mouseup', () => {
-    createGrid(sizeSlider.value)
-})
 
-const cells = document.querySelectorAll('.grid-item');
+function createCells() {
+    const cells = document.querySelectorAll('.grid-item');
 
-cells.forEach(n => {
-    n.addEventListener('mouseover', e => {
-        e.target.style.backgroundColor = 'black'
+    cells.forEach(n => {
+        n.addEventListener('mouseover', e => {
+            e.target.style.backgroundColor = 'black'
+        })
     })
-})
+}
+createCells();
 
+sizeSlider.addEventListener('mouseup', () => {
+    container.innerHTML = '';
+    createGrid(sizeSlider.value);
+    createCells();
+})
